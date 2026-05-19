@@ -84,23 +84,24 @@ nav.solid{
 /* ══════════════════════════════════
    HERO — Option 3: Split layout
    Left = white panel, dark text
-   Right = video in contained box
+   Right = 9:16 portrait video box
+   Both columns equal height
 ══════════════════════════════════ */
 .hero{
-  position:relative;width:100%;min-height:100vh;
+  position:relative;width:100%;
   display:grid;grid-template-columns:1fr 1fr;
-  align-items:center;
+  align-items:stretch;
   overflow:hidden;
-  padding-top:80px;/* nav height */
+  padding-top:80px;
   background:#FFFFFF;
+  min-height:100vh;
 }
-/* Left panel — white, dark text, all content */
+/* Left panel */
 .hero-left-panel{
-  padding:72px 56px 72px 60px;
+  padding:72px 52px 72px 60px;
   display:flex;flex-direction:column;justify-content:center;
   position:relative;z-index:2;
 }
-/* Subtle radial purple glow behind left content */
 .hero-left-panel::before{
   content:'';position:absolute;
   bottom:-80px;left:-80px;
@@ -117,8 +118,8 @@ nav.solid{
 .hero-eyebrow::before{content:'';width:24px;height:1px;background:var(--purple);}
 .hero h1{
   font-family:'Cormorant Garamond',serif;
-  font-size:clamp(3rem,4.5vw,5.2rem);
-  font-weight:300;line-height:1.0;letter-spacing:-.02em;
+  font-size:clamp(2.8rem,4vw,4.8rem);
+  font-weight:300;line-height:1.02;letter-spacing:-.02em;
   color:var(--text);margin-bottom:22px;
   position:relative;z-index:1;
   animation:fadeUp .8s .3s var(--ease-out) both;
@@ -126,7 +127,7 @@ nav.solid{
 .hero h1 em{font-style:italic;color:var(--purple);}
 .hero-sub{
   font-size:1rem;line-height:1.75;color:var(--text2);
-  max-width:420px;margin-bottom:36px;
+  max-width:400px;margin-bottom:36px;
   position:relative;z-index:1;
   animation:fadeUp .7s .45s var(--ease-out) both;
 }
@@ -135,56 +136,60 @@ nav.solid{
   position:relative;z-index:1;
   animation:fadeUp .7s .58s var(--ease-out) both;
 }
-/* Stats row under buttons */
 .hero-stats-row{
-  display:flex;gap:28px;margin-top:40px;padding-top:36px;
+  display:flex;gap:0;margin-top:40px;padding-top:36px;
   border-top:1px solid var(--border);
   position:relative;z-index:1;
   animation:fadeUp .6s .7s var(--ease-out) both;
 }
-.hsr-item{}
+.hsr-item{flex:1;padding-right:20px;}
+.hsr-item+.hsr-item{padding-left:20px;padding-right:0;border-left:1px solid var(--border);}
 .hsr-num{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:600;color:var(--text);letter-spacing:-.04em;line-height:1;}
-.hsr-lbl{font-size:.72rem;font-weight:500;color:var(--text3);letter-spacing:.04em;text-transform:uppercase;margin-top:3px;}
+.hsr-lbl{font-size:.7rem;font-weight:500;color:var(--text3);letter-spacing:.05em;text-transform:uppercase;margin-top:4px;}
 
-/* Right panel — video in a rounded box */
+/* Right panel — portrait video fills full column height */
 .hero-right-panel{
-  padding:40px 60px 40px 20px;
   position:relative;z-index:2;
+  padding:24px 60px 24px 20px;
+  display:flex;align-items:stretch;
   animation:fadeUp .8s .4s var(--ease-out) both;
 }
 .hero-video-box{
   position:relative;border-radius:24px;overflow:hidden;
-  aspect-ratio:4/3;
-  box-shadow:0 24px 80px rgba(124,58,237,.15),0 8px 32px rgba(0,0,0,.12);
+  width:100%;
+  /* Let portrait video determine height naturally */
+  display:flex;align-items:stretch;
+  box-shadow:0 24px 80px rgba(124,58,237,.18),0 8px 32px rgba(0,0,0,.10);
   border:1px solid rgba(124,58,237,.15);
+  min-height:520px;
 }
 .hero-video{
   width:100%;height:100%;object-fit:cover;
-  display:block;
+  display:block;flex:1;
 }
-/* Purple gradient tint on video */
 .hero-video-box::after{
   content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,rgba(124,58,237,.08) 0%,transparent 60%);
-  pointer-events:none;
+  background:linear-gradient(135deg,rgba(124,58,237,.06) 0%,transparent 50%);
+  pointer-events:none;z-index:1;
 }
-/* Floating badge on video */
+/* Floating badges */
 .hero-video-badge{
   position:absolute;bottom:20px;left:20px;z-index:3;
-  background:rgba(255,255,255,.92);
-  backdrop-filter:blur(12px);
-  border-radius:14px;padding:12px 18px;
+  background:rgba(255,255,255,.93);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-radius:14px;padding:12px 16px;
   box-shadow:0 4px 20px rgba(0,0,0,.12);
   display:flex;align-items:center;gap:10px;
 }
-.hvb-dot{width:8px;height:8px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 3px rgba(34,197,94,.2);flex-shrink:0;animation:pulse 2s infinite;}
+.hvb-dot{width:8px;height:8px;border-radius:50%;background:#22c55e;
+  box-shadow:0 0 0 3px rgba(34,197,94,.2);flex-shrink:0;
+  animation:pulse 2s infinite;}
 .hvb-text{font-size:.78rem;font-weight:600;color:#0A0A0A;white-space:nowrap;}
 .hvb-sub{font-size:.65rem;color:#6B7280;margin-top:1px;}
-@keyframes pulse{0%,100%{box-shadow:0 0 0 3px rgba(34,197,94,.2)}50%{box-shadow:0 0 0 6px rgba(34,197,94,.1)}}
-/* Score badge top right */
+@keyframes pulse{0%,100%{box-shadow:0 0 0 3px rgba(34,197,94,.2)}50%{box-shadow:0 0 0 7px rgba(34,197,94,.08)}}
 .hero-score-badge{
   position:absolute;top:20px;right:20px;z-index:3;
-  background:rgba(255,255,255,.92);backdrop-filter:blur(12px);
+  background:rgba(255,255,255,.93);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
   border-radius:14px;padding:12px 16px;text-align:center;
   box-shadow:0 4px 20px rgba(0,0,0,.12);
 }
@@ -209,7 +214,6 @@ nav.solid{
 }
 .btn-outline:hover{border-color:var(--purple);color:var(--purple);background:var(--purple-soft);}
 
-/* Scroll indicator hidden in split layout */
 .hero-scroll{display:none;}
 .hero-overlay,.hero-grain,.hero-strip{display:none;}
 
@@ -595,8 +599,8 @@ footer{background:var(--bg3);padding:72px 60px 36px;border-top:1px solid var(--b
   <div class="hero-right-panel">
     <div class="hero-video-box">
       <video class="hero-video" autoplay muted loop playsinline poster="hotel-pun-inn-logo.jpg">
+        <source src="hotel-pun-inn-video.mp4" type="video/mp4"/>
         <source src="hotel-pun-inn-video.mov" type="video/quicktime"/>
-        <source src="hotel-pun-inn-video.mov" type="video/mp4"/>
       </video>
       <!-- Live badge -->
       <div class="hero-video-badge">
