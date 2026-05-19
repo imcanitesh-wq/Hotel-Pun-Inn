@@ -82,91 +82,136 @@ nav.solid{
 .nav-hamburger span{width:22px;height:1.5px;background:var(--text);border-radius:2px;transition:all .3s;}
 
 /* ══════════════════════════════════
-   HERO — full screen video
+   HERO — Option 3: Split layout
+   Left = white panel, dark text
+   Right = video in contained box
 ══════════════════════════════════ */
 .hero{
-  position:relative;width:100%;height:100vh;
-  overflow:hidden;display:flex;align-items:flex-end;
+  position:relative;width:100%;min-height:100vh;
+  display:grid;grid-template-columns:1fr 1fr;
+  align-items:center;
+  overflow:hidden;
+  padding-top:80px;/* nav height */
+  background:#FFFFFF;
 }
-.hero-video{
-  position:absolute;inset:0;
-  width:100%;height:100%;object-fit:cover;
-  z-index:0;
+/* Left panel — white, dark text, all content */
+.hero-left-panel{
+  padding:72px 56px 72px 60px;
+  display:flex;flex-direction:column;justify-content:center;
+  position:relative;z-index:2;
 }
-/* Cinematic gradient overlays */
-.hero-overlay{
-  position:absolute;inset:0;z-index:1;
-  background:
-    linear-gradient(to top, rgba(13,12,11,1) 0%, rgba(13,12,11,.5) 30%, rgba(13,12,11,.1) 60%, transparent 100%),
-    linear-gradient(to right, rgba(13,12,11,.4) 0%, transparent 50%);
-}
-/* Animated film-grain texture */
-.hero-grain{
-  position:absolute;inset:0;z-index:2;pointer-events:none;opacity:.35;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
-}
-.hero-content{
-  position:relative;z-index:3;
-  padding:0 60px 72px;
-  max-width:760px;
+/* Subtle radial purple glow behind left content */
+.hero-left-panel::before{
+  content:'';position:absolute;
+  bottom:-80px;left:-80px;
+  width:400px;height:400px;border-radius:50%;
+  background:radial-gradient(ellipse,rgba(124,58,237,.07) 0%,transparent 65%);
+  pointer-events:none;z-index:0;
 }
 .hero-eyebrow{
   display:inline-flex;align-items:center;gap:8px;
   font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--purple);margin-bottom:18px;
+  color:var(--purple);margin-bottom:20px;position:relative;z-index:1;
   animation:fadeUp .6s .2s var(--ease-out) both;
 }
 .hero-eyebrow::before{content:'';width:24px;height:1px;background:var(--purple);}
 .hero h1{
   font-family:'Cormorant Garamond',serif;
-  font-size:clamp(3.2rem,7vw,7rem);
-  font-weight:300;line-height:.95;letter-spacing:-.02em;
-  color:var(--cream);margin-bottom:24px;
-  animation:fadeUp .8s .35s var(--ease-out) both;
+  font-size:clamp(3rem,4.5vw,5.2rem);
+  font-weight:300;line-height:1.0;letter-spacing:-.02em;
+  color:var(--text);margin-bottom:22px;
+  position:relative;z-index:1;
+  animation:fadeUp .8s .3s var(--ease-out) both;
 }
-.hero h1 em{font-style:italic;color:var(--purple-mid);}
+.hero h1 em{font-style:italic;color:var(--purple);}
 .hero-sub{
-  font-size:1rem;line-height:1.7;color:rgba(245,240,232,.7);
-  max-width:440px;margin-bottom:36px;font-weight:300;
-  animation:fadeUp .7s .5s var(--ease-out) both;
+  font-size:1rem;line-height:1.75;color:var(--text2);
+  max-width:420px;margin-bottom:36px;
+  position:relative;z-index:1;
+  animation:fadeUp .7s .45s var(--ease-out) both;
 }
 .hero-actions{
-  display:flex;align-items:center;gap:14px;
-  animation:fadeUp .7s .62s var(--ease-out) both;
+  display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+  position:relative;z-index:1;
+  animation:fadeUp .7s .58s var(--ease-out) both;
 }
+/* Stats row under buttons */
+.hero-stats-row{
+  display:flex;gap:28px;margin-top:40px;padding-top:36px;
+  border-top:1px solid var(--border);
+  position:relative;z-index:1;
+  animation:fadeUp .6s .7s var(--ease-out) both;
+}
+.hsr-item{}
+.hsr-num{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:600;color:var(--text);letter-spacing:-.04em;line-height:1;}
+.hsr-lbl{font-size:.72rem;font-weight:500;color:var(--text3);letter-spacing:.04em;text-transform:uppercase;margin-top:3px;}
+
+/* Right panel — video in a rounded box */
+.hero-right-panel{
+  padding:40px 60px 40px 20px;
+  position:relative;z-index:2;
+  animation:fadeUp .8s .4s var(--ease-out) both;
+}
+.hero-video-box{
+  position:relative;border-radius:24px;overflow:hidden;
+  aspect-ratio:4/3;
+  box-shadow:0 24px 80px rgba(124,58,237,.15),0 8px 32px rgba(0,0,0,.12);
+  border:1px solid rgba(124,58,237,.15);
+}
+.hero-video{
+  width:100%;height:100%;object-fit:cover;
+  display:block;
+}
+/* Purple gradient tint on video */
+.hero-video-box::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(124,58,237,.08) 0%,transparent 60%);
+  pointer-events:none;
+}
+/* Floating badge on video */
+.hero-video-badge{
+  position:absolute;bottom:20px;left:20px;z-index:3;
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(12px);
+  border-radius:14px;padding:12px 18px;
+  box-shadow:0 4px 20px rgba(0,0,0,.12);
+  display:flex;align-items:center;gap:10px;
+}
+.hvb-dot{width:8px;height:8px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 3px rgba(34,197,94,.2);flex-shrink:0;animation:pulse 2s infinite;}
+.hvb-text{font-size:.78rem;font-weight:600;color:#0A0A0A;white-space:nowrap;}
+.hvb-sub{font-size:.65rem;color:#6B7280;margin-top:1px;}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 3px rgba(34,197,94,.2)}50%{box-shadow:0 0 0 6px rgba(34,197,94,.1)}}
+/* Score badge top right */
+.hero-score-badge{
+  position:absolute;top:20px;right:20px;z-index:3;
+  background:rgba(255,255,255,.92);backdrop-filter:blur(12px);
+  border-radius:14px;padding:12px 16px;text-align:center;
+  box-shadow:0 4px 20px rgba(0,0,0,.12);
+}
+.hsb-num{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:600;color:var(--purple);line-height:1;}
+.hsb-stars{font-size:.75rem;color:var(--purple);letter-spacing:1px;margin:2px 0;}
+.hsb-lbl{font-size:.62rem;font-weight:600;color:#9CA3AF;text-transform:uppercase;letter-spacing:.05em;}
+
+/* Buttons */
 .btn-gold{
   background:var(--purple);color:#fff;
   padding:13px 28px;border-radius:var(--rpill);
   font-size:.875rem;font-weight:600;letter-spacing:.01em;
   transition:all .22s var(--ease-spring);display:inline-block;
 }
-.btn-gold:hover{background:var(--purple2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(124,58,237,.3)}
+.btn-gold:hover{background:var(--purple2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(124,58,237,.35)}
 .btn-outline{
-  background:transparent;color:var(--cream);
+  background:transparent;color:var(--text);
   padding:12px 28px;border-radius:var(--rpill);
-  border:1px solid rgba(245,240,232,.3);
+  border:1.5px solid var(--border);
   font-size:.875rem;font-weight:500;
   transition:all .22s;display:inline-block;
 }
-.btn-outline:hover{border-color:var(--cream);background:rgba(255,255,255,.06)}
+.btn-outline:hover{border-color:var(--purple);color:var(--purple);background:var(--purple-soft);}
 
-/* Scroll indicator */
-.hero-scroll{
-  position:absolute;right:60px;bottom:36px;z-index:3;
-  display:flex;align-items:center;gap:10px;
-  font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;
-  color:rgba(245,240,232,.45);
-  animation:fadeUp .6s .8s var(--ease-out) both;
-}
-.scroll-line{width:40px;height:1px;background:rgba(245,240,232,.25);}
-
-/* Photo frame overlay — Rectanc style film strip at bottom */
-.hero-strip{
-  position:absolute;bottom:0;left:0;right:0;z-index:3;
-  height:4px;
-  background:linear-gradient(90deg,transparent,var(--purple),transparent);
-  opacity:.5;
-}
+/* Scroll indicator hidden in split layout */
+.hero-scroll{display:none;}
+.hero-overlay,.hero-grain,.hero-strip{display:none;}
 
 @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
 
@@ -471,6 +516,10 @@ footer{background:var(--bg3);padding:72px 60px 36px;border-top:1px solid var(--b
 ══════════════════════════════════ */
 @media(max-width:1024px){
   nav,section,.director,.about,.gallery-sec,.vehicles,.contact,.cta-banner,footer{padding-left:28px;padding-right:28px;}
+  .hero{grid-template-columns:1fr;min-height:auto;}
+  .hero-left-panel{padding:100px 28px 48px;}
+  .hero-right-panel{padding:0 28px 60px;order:2;}
+  .hero-video-box{aspect-ratio:16/9;}
   .director-inner,.about-inner,.contact-inner{grid-template-columns:1fr;gap:40px;}
   .rooms-grid,.vehicle-grid{grid-template-columns:1fr 1fr;}
   .sb-inner{grid-template-columns:1fr 1fr;}
@@ -479,16 +528,17 @@ footer{background:var(--bg3);padding:72px 60px 36px;border-top:1px solid var(--b
   .ft{grid-template-columns:1fr 1fr;gap:32px;}
   .nav-links{display:none;}
   .director-badge{left:16px;}
-  nav,.rooms-header,.gallery-header,.vehicles-header{padding-left:28px;padding-right:28px;}
+  .hero-stats-row{gap:20px;}
 }
 @media(max-width:640px){
-  .hero-content{padding:0 24px 56px;}
-  .hero-scroll{display:none;}
+  .hero-left-panel{padding:88px 20px 40px;}
+  .hero-right-panel{padding:0 20px 48px;}
   .rooms-grid,.vehicle-grid,.sb-inner{grid-template-columns:1fr;}
   .gallery-grid{grid-template-columns:1fr;}
   .ft{grid-template-columns:1fr;}
-  .hero h1{font-size:3rem;}
+  .hero h1{font-size:2.6rem;}
   .fbot{flex-direction:column;gap:12px;text-align:center;}
+  .hero-stats-row{gap:16px;}
 }
 </style>
 </head>
@@ -500,7 +550,7 @@ footer{background:var(--bg3);padding:72px 60px 36px;border-top:1px solid var(--b
     <img src="hotel-pun-inn-logo.jpg" alt="Hotel Pun Inn Logo"/>
     <div class="nav-logo-text">
       <span>Hotel Pun Inn</span>
-      <span>Kathmandu</span>
+      <span>Bhotebahal · Kathmandu</span>
     </div>
   </a>
   <ul class="nav-links">
@@ -513,30 +563,60 @@ footer{background:var(--bg3);padding:72px 60px 36px;border-top:1px solid var(--b
   <a href="tel:+977015320666" class="nav-cta">Book Now</a>
 </nav>
 
-<!-- ══ HERO — VIDEO ══ -->
+<!-- ══ HERO — Option 3: Split layout ══ -->
 <section class="hero" id="home">
-  <video class="hero-video" autoplay muted loop playsinline poster="hotel-pun-inn-logo.jpg">
-    <source src="hotel-pun-inn-video.mov" type="video/quicktime"/>
-    <source src="hotel-pun-inn-video.mov" type="video/mp4"/>
-  </video>
-  <div class="hero-overlay"></div>
-  <div class="hero-grain"></div>
-  <div class="hero-strip"></div>
 
-  <div class="hero-content">
+  <!-- LEFT: White panel, dark text, fully readable -->
+  <div class="hero-left-panel">
     <div class="hero-eyebrow">Bhotebahal, Kathmandu</div>
-    <h1>Your Home in the<br>Heart of <em>Nepal</em></h1>
+    <h1>Your Home<br>in the Heart<br>of <em>Nepal</em></h1>
     <p class="hero-sub">Where ancient Nepali hospitality meets modern comfort. Hotel Pun Inn — a peaceful sanctuary in the vibrant heart of Kathmandu.</p>
     <div class="hero-actions">
       <a href="#rooms" class="btn-gold">Explore Rooms</a>
       <a href="#contact" class="btn-outline">Contact Us</a>
     </div>
+    <div class="hero-stats-row">
+      <div class="hsr-item">
+        <div class="hsr-num">3+</div>
+        <div class="hsr-lbl">Room Types</div>
+      </div>
+      <div class="hsr-item">
+        <div class="hsr-num">24/7</div>
+        <div class="hsr-lbl">Service</div>
+      </div>
+      <div class="hsr-item">
+        <div class="hsr-num">4.8★</div>
+        <div class="hsr-lbl">Guest Rating</div>
+      </div>
+    </div>
   </div>
 
-  <div class="hero-scroll">
-    <span class="scroll-line"></span>
-    Scroll to explore
+  <!-- RIGHT: Video in contained rounded box -->
+  <div class="hero-right-panel">
+    <div class="hero-video-box">
+      <video class="hero-video" autoplay muted loop playsinline poster="hotel-pun-inn-logo.jpg">
+        <source src="hotel-pun-inn-video.mov" type="video/quicktime"/>
+        <source src="hotel-pun-inn-video.mov" type="video/mp4"/>
+      </video>
+      <!-- Live badge -->
+      <div class="hero-video-badge">
+        <div>
+          <div class="hvb-dot"></div>
+        </div>
+        <div>
+          <div class="hvb-text">Now Welcoming Guests</div>
+          <div class="hvb-sub">Bhotebahal, Kathmandu</div>
+        </div>
+      </div>
+      <!-- Score badge -->
+      <div class="hero-score-badge">
+        <div class="hsb-num">4.8</div>
+        <div class="hsb-stars">★★★★★</div>
+        <div class="hsb-lbl">Guest Score</div>
+      </div>
+    </div>
   </div>
+
 </section>
 
 <!-- ══ DIRECTOR MESSAGE ══ -->
