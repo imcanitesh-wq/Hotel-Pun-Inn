@@ -169,7 +169,7 @@ nav.solid{
 .hero-featured{display:flex;flex-direction:column;gap:12px;}
 .hero-featured-label{font-size:.62rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--text3);}
 .hero-featured-logos{display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
-.hero-featured-logos .ota-item img{height:18px;transition:transform .2s;}
+.hero-featured-logos .ota-item img{height:24px;transition:transform .2s;}
 .hero-featured-logos .ota-item:hover img{transform:scale(1.05);}
 .hero-stats-row{
   display:flex;gap:0;margin-top:40px;padding-top:36px;
@@ -187,7 +187,7 @@ nav.solid{
 .featured-on-inner{max-width:900px;margin:0 auto;text-align:center;}
 .featured-on-label{font-size:.65rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--text3);margin-bottom:18px;}
 .featured-on-logos{display:flex;align-items:center;justify-content:center;gap:36px;flex-wrap:wrap;}
-.ota-item{display:flex;align-items:center;gap:8px;transition:transform .2s;cursor:default;}
+.ota-item{display:flex;align-items:center;gap:8px;transition:transform .2s;cursor:pointer;}
 .ota-item:hover{transform:scale(1.05);}
 .ota-item img{height:22px;width:auto;object-fit:contain;}
 
@@ -666,18 +666,18 @@ footer{background:var(--bg3);padding:72px 60px 36px;border-top:1px solid var(--b
       <div class="hero-featured">
         <div class="hero-featured-label">Featured On</div>
         <div class="hero-featured-logos">
-          <div class="ota-item">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Booking.com_logo.svg/320px-Booking.com_logo.svg.png" alt="Booking.com"/>
-          </div>
-          <div class="ota-item">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Agoda_transparent_logo.svg/320px-Agoda_transparent_logo.svg.png" alt="Agoda"/>
-          </div>
-          <div class="ota-item">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/MakeMyTrip_Logo.svg/320px-MakeMyTrip_Logo.svg.png" alt="MakeMyTrip"/>
-          </div>
-          <div class="ota-item">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Expedia_logo.svg/320px-Expedia_logo.svg.png" alt="Expedia"/>
-          </div>
+          <a href="https://www.booking.com" target="_blank" class="ota-item">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/b/be/Booking.com_logo.svg" alt="Booking.com"/>
+          </a>
+          <a href="https://www.agoda.com" target="_blank" class="ota-item">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Agoda_Logo_2022.svg" alt="Agoda"/>
+          </a>
+          <a href="https://www.makemytrip.com" target="_blank" class="ota-item">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/61/Makemytrip_logo.svg" alt="MakeMyTrip"/>
+          </a>
+          <a href="https://www.expedia.com" target="_blank" class="ota-item">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/3/3b/Expedia_Logo_2023.svg" alt="Expedia"/>
+          </a>
         </div>
       </div>
     </div>
